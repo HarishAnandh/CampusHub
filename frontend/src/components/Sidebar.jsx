@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   FaHome,
   FaUsers,
@@ -14,13 +15,18 @@ function Sidebar() {
       <h2 className="logo">🏛 CampusHub</h2>
 
       <nav>
-        <Link to="/dashboard"><FaHome /> Dashboard</Link>
-        <Link to="/clubs"><FaUsers /> Clubs</Link>
-        <Link to="/events"><FaCalendarAlt /> Events</Link>
-        <Link to="/polls"><FaVoteYea /> Polls</Link>
-        <Link to="/documents"><FaFileAlt /> Documents</Link>
-        <Link to="/profile"><FaUser /> Profile</Link>
-      </nav>
+        <NavLink to="/dashboard">🏠 Dashboard</NavLink>
+
+        <NavLink to="/clubs">👥 Clubs</NavLink>
+
+        <NavLink to="/events">📅 Events</NavLink>
+
+        <NavLink to="/polls">🗳️ Polls</NavLink>
+
+        <NavLink to="/discussions">💬 Discussions</NavLink>
+
+        <NavLink to="/profile">👤 Profile</NavLink>
+</nav>
     </aside>
   );
 }
