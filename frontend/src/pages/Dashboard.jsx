@@ -49,7 +49,9 @@ function Dashboard() {
 
       <Navbar title="Dashboard" />
 
-        <h1>Welcome back, @PixelKnight 👋</h1>
+      <h1>
+  Welcome back, {localStorage.getItem("username") || "User"} 👋
+</h1>
 
         <p className="subtitle">
           One Platform. Every Club. Every Voice.

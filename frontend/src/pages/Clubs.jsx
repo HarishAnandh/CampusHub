@@ -1,98 +1,126 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import ClubCard from "../components/ClubCard";
 import CreateClubModal from "../components/CreateClubModal";
+
+import { getClubs, createClub } from "../services/api";
+
 import "../styles/clubs.css";
 
 function Clubs() {
+  const [clubs, setClubs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [search, setSearch] = useState("");
-  const handleCreateClub = (newClub) => {
-    setClubs([...clubs, newClub]);
-  };
-  const [clubs, setClubs] = useState([
-    {
-      id: 1,
-      icon: "💻",
-      name: "Coding Club",
-      members: 120,
-      category: "Technology",
-    },
-    {
-      id: 2,
-      icon: "🤖",
-      name: "AI Club",
-      members: 85,
-      category: "Artificial Intelligence",
-    },
-    {
-      id: 3,
-      icon: "🎭",
-      name: "Drama Club",
-      members: 60,
-      category: "Arts",
-    },
-    {
-      id: 4,
-      icon: "🏸",
-      name: "Sports Club",
-      members: 150,
-      category: "Sports",
-    },
-  ]);
 
-  const filteredClubs = clubs.filter((club) =>
-    club.name.toLowerCase().includes(search.toLowerCase())
-  );
+  useEffect(() => {
+    loadClubs();
+  }, []);
+
+  const addIcons = (clubs) => {
+    return clubs.map((club) => ({
+      ...club,
+      icon:
+        club.icon ||
+        (club.category === "Technology"
+          ? "💻"
+          : club.category === "Cultural"
+          ? "🎭"
+          : club.category === "Sports"
+          ? "🏆"
+          : "🏛️"),
+    }));
+  };
+
+  const loadClubs = async () => {
+    try {
+      const data = await getClubs();
+      setClubs(addIcons(data));
+    } catch (err) {
+      console.error(err);
+      setError("Unable to load clubs.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreateClub = async (clubData) => {
+    try {
+      const newClub = await createClub(clubData);
+
+      const clubWithIcon = {
+        ...newClub,
+        icon:
+          clubData.icon ||
+          (newClub.category === "Technology"
+            ? "💻"
+            : newClub.category === "Cultural"
+            ? "🎭"
+            : newClub.category === "Sports"
+            ? "🏆"
+            : "🏛️"),
+      };
+
+      setClubs((prevClubs) => [
+        ...prevClubs,
+        clubWithIcon,
+      ]);
+
+      setShowModal(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to create club.");
+      throw err;
+    }
+  };
 
   return (
     <div className="dashboard-layout">
-
       <Sidebar />
 
       <main className="dashboard-content">
+        <Navbar title="Clubs" />
 
-      <Navbar title="Clubs" />
-
-        <div className="club-header">
-
-          <h1>Clubs</h1>
+        <div className="clubs-header">
+          <div>
+            <h1>Campus Clubs</h1>
+            <p>
+              Discover and participate in student communities.
+            </p>
+          </div>
 
           <button
-        className="create-btn"
-        onClick={() => setShowModal(true)}>
-        + Create Club
+            className="create-club-btn"
+            onClick={() => setShowModal(true)}
+          >
+            + Create Club
           </button>
-
-
         </div>
 
-        <input
-          className="search-box"
-          placeholder="Search clubs..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        {loading && <p>Loading clubs...</p>}
 
-        <div className="clubs-grid">
+        {error && <p>{error}</p>}
 
-          {filteredClubs.map((club) => (
-            <ClubCard
-              key={club.id}
-              club={club}
-            />
-          ))}
+        {!loading && !error && (
+          <div className="clubs-grid">
+            {clubs.map((club) => (
+              <ClubCard
+                key={club.id}
+                club={club}
+              />
+            ))}
+          </div>
+        )}
 
-        </div>
         {showModal && (
-  <CreateClubModal
-    onClose={() => setShowModal(false)}
-    onCreate={handleCreateClub}
-  />
-)}
+          <CreateClubModal
+            onClose={() => setShowModal(false)}
+            onCreate={handleCreateClub}
+          />
+        )}
       </main>
-
     </div>
   );
 }

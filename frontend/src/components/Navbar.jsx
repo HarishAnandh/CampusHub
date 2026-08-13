@@ -9,7 +9,9 @@ function Navbar({ title }) {
         <FaBell className="icon" />
         <div className="user-profile">
           <FaUserCircle className="profile-icon" />
-          <span>@PixelKnight</span>
+          <span>
+  {localStorage.getItem("username") || "User"}
+</span>
         </div>
       </div>
     </header>

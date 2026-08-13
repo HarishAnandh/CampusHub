@@ -1,37 +1,42 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { loginUser } from "../services/api";
+import { registerUser } from "../services/api";
 
 import "../styles/login.css";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const data = await loginUser({
+      await registerUser({
         username,
+        email,
         password,
       });
 
-      // Store authentication information
-      localStorage.setItem("token", data.access_token);
-      localStorage.setItem("username", data.username);
-
-      // Go to dashboard
-      navigate("/dashboard");
+      // Registration successful
+      navigate("/login");
 
     } catch (err) {
       setError(err.message);
@@ -46,14 +51,16 @@ function Login() {
       <div className="login-card">
 
         <div className="logo">
+
           <h1>🏛 CampusHub</h1>
 
           <p>
-            One Platform. Every Club. Every Voice.
+            Create your CampusHub account
           </p>
+
         </div>
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
 
           <div className="input-group">
 
@@ -61,9 +68,23 @@ function Login() {
 
             <input
               type="text"
-              placeholder="@PixelKnight"
+              placeholder="Choose a username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+
+          </div>
+
+          <div className="input-group">
+
+            <label>Email</label>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
 
@@ -75,9 +96,23 @@ function Login() {
 
             <input
               type="password"
-              placeholder="Enter password"
+              placeholder="Create a password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+          </div>
+
+          <div className="input-group">
+
+            <label>Confirm Password</label>
+
+            <input
+              type="password"
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
 
@@ -94,17 +129,17 @@ function Login() {
             className="login-btn"
             disabled={loading}
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
 
         </form>
 
         <div className="bottom-links">
 
-          New here?{" "}
+          Already have an account?{" "}
 
-          <Link to="/register">
-            Create Account
+          <Link to="/login">
+            Login
           </Link>
 
         </div>
@@ -115,4 +150,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
