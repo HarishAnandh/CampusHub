@@ -1,4 +1,4 @@
-from passlib.context import CryptContext
+import hashlib
 from jose import jwt, JWTError
 
 from fastapi import FastAPI, Depends, HTTPException
@@ -25,10 +25,7 @@ SECRET_KEY = "campushub-secret-key-change-this-later"
 ALGORITHM = "HS256"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
-pwd_context = CryptContext(
-    schemes=["bcrypt"],
-    deprecated="auto"
-)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -48,17 +45,11 @@ def get_db():
         db.close()
 
 def hash_password(password: str):
-    return pwd_context.hash(password)
+    return hashlib.sha256(password.encode("utf-8")).hexdigest()
 
 
-def verify_password(
-    plain_password: str,
-    hashed_password: str
-):
-    return pwd_context.verify(
-        plain_password,
-        hashed_password
-    )
+def verify_password(plain_password: str, hashed_password: str):
+    return hash_password(plain_password) == hashed_password
 
 
 def create_access_token(username: str):
