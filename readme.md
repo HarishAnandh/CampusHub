@@ -1,326 +1,70 @@
-Absolutely. Your current README is outdated — it still says the backend/authentication are "not started," while you've now built a full-stack CampusHub application.
-
-Here is a **complete replacement README** based on what you've actually implemented so far.
-
-````markdown
 # 🏛️ CampusHub
 
-> **One Platform. Every Club. Every Voice.**
+A student-focused campus management platform that brings clubs, events, polls, discussions, profiles, and student interactions together in one place.
 
-CampusHub is a full-stack student campus platform designed to bring clubs, events, discussions, polls, elections, and student profiles together in one centralized application.
+## 🚀 Project Overview
 
-The platform allows students to create accounts, log in securely, discover campus clubs, participate in discussions, view events, vote in polls, and manage their profile.
+CampusHub is a full-stack web application designed to provide students with a centralized platform for discovering and participating in campus activities.
 
----
+The application supports:
 
-# ✨ Features
-
-## 🔐 Authentication
-
-CampusHub includes user authentication with:
-
-- User registration
-- Username
-- Email
-- Password
-- Username-based login
-- Password verification
-- JWT access tokens
-- Persistent login information using browser local storage
-- Dynamic username across the application
-- Logout support
-
-### Registration
-
-New users provide:
-
-- Username
-- Email
-- Password
-
-Usernames must be unique.
-
-### Login
-
-Users can log in using:
-
-```text
-Username + Password
-````
-
-After successful authentication, the application stores the authentication token and username and redirects the user to the dashboard.
+* Student authentication
+* Campus clubs
+* Club membership
+* Club discussions
+* Club events
+* Polls and voting
+* User profiles
+* Campus event locations
+* Dynamic dashboard information
+* Responsive UI
 
 ---
 
-# 🏠 Dashboard
+# 🛠️ Tech Stack
 
-The dashboard acts as the main CampusHub home page.
+## Frontend
 
-It includes:
+* React.js
+* Vite
+* React Router DOM
+* CSS
+* JavaScript
+* React Icons
 
-* Personalized welcome message
-* Navigation sidebar
-* Navbar
-* Campus statistics/cards
-* Upcoming events
-* Announcements
-* Quick actions
-* Navigation to major CampusHub modules
+## Backend
 
-The dashboard displays the currently authenticated user's username dynamically.
+* FastAPI
+* Python
+* SQLAlchemy
+* Uvicorn
+* JWT-based authentication
 
----
+## Database
 
-# 👥 Campus Clubs
+* PostgreSQL
+* Supabase
 
-The Clubs module allows students to discover and participate in campus communities.
+## Deployment
 
-### Features
-
-* View all clubs
-* Create a new club
-* View individual club details
-* Club categories
-* Club member count
-* Club icons
-* Join Club interface
-* Club-specific discussions
-* Club-specific events
-
-### Club Creation
-
-Users can create clubs by providing:
-
-* Club name
-* Category
-* Club icon
-
-Club information is stored through the backend API and database.
+* **Frontend:** Vercel
+* **Backend:** Render
+* **Database:** Supabase Cloud
 
 ---
 
-# 💬 Club Discussions
-
-Each club can have its own discussion area.
-
-Students can:
-
-* View club posts
-* Create new posts
-* See the username of the person who created a post
-* View posts chronologically
-
-Usernames are dynamically retrieved from the authenticated user rather than relying on fixed names such as `Anonymous`.
-
----
-
-# 📅 Events
-
-CampusHub provides an events module for campus activities.
-
-### Features
-
-* View upcoming events
-* Create events
-* Event title
-* Event description
-* Date and time
-* Location
-* Event creator
-* Club-specific events
-
-Events are retrieved and stored through the FastAPI backend.
-
----
-
-# 🗳️ Polls & Elections
-
-CampusHub includes an interactive polling and election system.
-
-### Features
-
-* View existing polls
-* Create custom polls
-* Add multiple options
-* Vote on polls
-* Store vote counts
-* Display current poll results
-* Dynamically update poll results
-
-A poll consists of:
-
-```text
-Question
-    ↓
-Option 1
-Option 2
-Option 3
-...
-    ↓
-Votes
-```
-
-The frontend can use the vote data returned from the backend to generate dynamic result charts/progress visualizations.
-
----
-
-# 👤 User Profile
-
-CampusHub includes a dedicated profile page for authenticated users.
-
-The profile system is designed around the currently logged-in account.
-
-User information can be displayed dynamically using the username stored after authentication.
-
----
-
-# 🚪 Logout
-
-Users can log out of CampusHub.
-
-Logout removes the locally stored authentication information:
-
-```text
-token
-username
-```
-
-and returns the user to the login page.
-
----
-
-# 🗄️ Database
-
-CampusHub uses a relational database through SQLAlchemy.
-
-Current database models include:
-
-### User
-
-Stores:
-
-* ID
-* Username
-* Email
-* Password hash
-* Account creation date
-
-### Club
-
-Stores:
-
-* ID
-* Name
-* Description
-* Category
-* Member count
-
-### ClubPost
-
-Stores:
-
-* ID
-* Club ID
-* Post content
-* Username
-* Creation date
-
-### ClubEvent
-
-Stores:
-
-* ID
-* Club ID
-* Event title
-* Description
-* Event date
-* Location
-* Creator
-* Creation date
-
-### Poll
-
-Stores:
-
-* ID
-* Question
-* Creation date
-
-### PollOption
-
-Stores:
-
-* ID
-* Poll ID
-* Option text
-* Vote count
-
----
-
-# 🔌 Backend API
-
-The backend is implemented using **FastAPI**.
-
-### Authentication
-
-```text
-POST /api/auth/register
-POST /api/auth/login
-```
-
-### Clubs
-
-```text
-GET  /api/clubs
-POST /api/clubs
-GET  /api/clubs/{club_id}
-```
-
-### Club Discussions
-
-```text
-GET  /api/clubs/{club_id}/posts
-POST /api/clubs/{club_id}/posts
-```
-
-### Club Events
-
-```text
-GET  /api/clubs/{club_id}/events
-POST /api/clubs/{club_id}/events
-```
-
-### Polls
-
-```text
-GET  /api/polls
-POST /api/polls
-POST /api/polls/{poll_id}/vote
-```
-
-### Health Check
-
-```text
-GET /api/health
-```
-
----
-
-# 🏗️ Project Architecture
+# 📁 Project Structure
 
 ```text
 CampusHub/
 │
 ├── frontend/
-│   │
 │   ├── src/
 │   │   ├── assets/
 │   │   │
 │   │   ├── components/
 │   │   │   ├── Sidebar.jsx
 │   │   │   ├── Navbar.jsx
-│   │   │   ├── ClubCard.jsx
-│   │   │   ├── CreateClubModal.jsx
 │   │   │   ├── DashboardCard.jsx
 │   │   │   ├── EventCard.jsx
 │   │   │   ├── AnnouncementCard.jsx
@@ -328,13 +72,11 @@ CampusHub/
 │   │   │
 │   │   ├── pages/
 │   │   │   ├── Login.jsx
-│   │   │   ├── Register.jsx
 │   │   │   ├── Dashboard.jsx
 │   │   │   ├── Clubs.jsx
 │   │   │   ├── ClubDetails.jsx
 │   │   │   ├── Events.jsx
 │   │   │   ├── Polls.jsx
-│   │   │   ├── Discussions.jsx
 │   │   │   └── Profile.jsx
 │   │   │
 │   │   ├── services/
@@ -344,7 +86,8 @@ CampusHub/
 │   │   │   ├── global.css
 │   │   │   ├── login.css
 │   │   │   ├── dashboard.css
-│   │   │   ├── clubs.css
+│   │   │   ├── events.css
+│   │   │   ├── profile.css
 │   │   │   └── clubDetails.css
 │   │   │
 │   │   ├── App.jsx
@@ -353,7 +96,6 @@ CampusHub/
 │   └── package.json
 │
 ├── backend/
-│   │
 │   ├── main.py
 │   ├── models.py
 │   ├── database.py
@@ -365,148 +107,214 @@ CampusHub/
 
 ---
 
-# 🧭 Frontend Routes
+# 🔐 Authentication
 
-React Router is used for application navigation.
+CampusHub includes backend-connected authentication.
 
-| Route          | Page         |
-| -------------- | ------------ |
-| `/`            | Login        |
-| `/register`    | Registration |
-| `/dashboard`   | Dashboard    |
-| `/clubs`       | Clubs        |
-| `/clubs/:id`   | Club Details |
-| `/events`      | Events       |
-| `/polls`       | Polls        |
-| `/discussions` | Discussions  |
-| `/profile`     | User Profile |
+### Registration
+
+Students can create an account using:
+
+* Username
+* Email
+* Password
+
+### Login
+
+Users authenticate through the FastAPI backend.
+
+Authentication information is stored in the browser using:
+
+```text
+localStorage
+```
+
+The frontend uses the backend API through:
+
+```text
+VITE_API_URL
+```
 
 ---
 
-# ⚛️ Frontend
+# 🏛️ Clubs
 
-The frontend is built using:
+The Clubs module allows students to discover and interact with campus clubs.
 
-* React
-* Vite
-* React Router DOM
-* React Icons
-* CSS
-* Fetch API
+### Features
 
-API communication is centralized through:
+* View available clubs
+* View club details
+* Join clubs
+* Prevent duplicate membership
+* Display club members
+* Create club discussions
+* Create club events
+* View upcoming club events
+* Edit club information
+
+### Club Members
+
+Once a user joins a club, they can be displayed in the **Club Members** section.
+
+Membership information is stored in the PostgreSQL database.
+
+---
+
+# 💬 Anonymous Club Discussions
+
+Club members can participate in anonymous discussions.
+
+Users can:
+
+* Create anonymous posts
+* View existing posts
+* View post timestamps
+
+The user's identity is not displayed in the discussion UI.
+
+---
+
+# 📅 Events
+
+CampusHub includes an Events module for discovering campus activities.
+
+Currently supported:
+
+* Event listing
+* Event cards
+* Event search
+* Event date and time
+* Event location
+* Event description
+* Club-specific event creation
+* Campus event location visualization
+
+The Events page is designed to support a live map where event locations can be represented using markers.
+
+### Planned
+
+* Fully functional global event creation
+* Editable event information
+* Editable event locations
+* Interactive map-based event selection
+
+---
+
+# 🗳️ Polls
+
+CampusHub includes a polling system.
+
+Students can:
+
+* View polls
+* Create polls
+* Add multiple options
+* Vote on options
+* View poll results
+
+Poll data is stored in PostgreSQL.
+
+---
+
+# 📊 Dashboard
+
+The Dashboard provides an overview of the student's CampusHub activity.
+
+### Dashboard information
+
+* My Clubs
+* Events
+* Active Polls
+* Documents
+* Upcoming Events
+* Recent Announcements
+* Quick Actions
+
+The dashboard uses backend data for clubs and polls instead of relying entirely on static values.
+
+### Quick Actions
+
+The Dashboard provides shortcuts for:
+
+* Create Club
+* Create Event
+* Create Poll
+
+---
+
+# 👤 Profile
+
+The Profile section contains:
+
+* Username
+* Account information
+* CampusHub activity
+* Clubs joined
+* Events
+* Polls
+* Account settings
+* Logout
+
+## Credits
+
+CampusHub credits:
+
+* **Harish Anandh** — Founder
+* **Shanmugavel M** — CEO, Tech Head
+* **Stefon S** — CMO
+
+### Product
+
+**A Hector Product**
+
+---
+
+# 🗺️ Event Location System
+
+CampusHub includes support for displaying event locations.
+
+The Events page is designed with a map-based interface where:
+
+* Events can have locations
+* Locations can be represented using markers
+* Selecting an event can show its location
+* Event descriptions can be displayed below the map
+
+The system can later be extended with an interactive map provider.
+
+---
+
+# 🔌 API Integration
+
+The frontend communicates with the FastAPI backend through:
 
 ```text
 src/services/api.js
 ```
 
-The frontend uses the environment variable:
-
-```env
-VITE_API_URL
-```
-
-Example:
-
-```env
-VITE_API_URL=http://127.0.0.1:8000
-```
-
-For production:
-
-```env
-VITE_API_URL=https://campushub-backend-mvns.onrender.com
-```
-
----
-
-# 🐍 Backend
-
-The backend is built using:
-
-* Python
-* FastAPI
-* SQLAlchemy
-* Pydantic
-* JWT
-* PostgreSQL
-* CORS middleware
-
-The backend exposes REST APIs consumed by the React frontend.
-
----
-
-# 🔑 Authentication Flow
-
-The authentication flow works as follows:
+The API layer handles operations including:
 
 ```text
-User
- │
- ▼
-Registration
- │
- ├── Username
- ├── Email
- └── Password
- │
- ▼
-FastAPI
- │
- ▼
-Database
- │
- ▼
-Account Created
+Authentication
+Clubs
+Club Posts
+Club Events
+Polls
+Voting
+Club Membership
+Club Members
 ```
 
-Login:
-
-```text
-User
- │
- ▼
-Username + Password
- │
- ▼
-FastAPI
- │
- ▼
-Verify Credentials
- │
- ▼
-JWT Token
- │
- ▼
-Frontend
- │
- ├── Store token
- └── Store username
- │
- ▼
-Dashboard
-```
-
-The username can then be reused throughout CampusHub for:
-
-* Dashboard
-* Profile
-* Club discussions
-* Posts
-* Events
-* Other user-generated content
+The backend API is deployed on Render.
 
 ---
 
 # 🌐 Deployment
 
-## Frontend
+## Frontend — Vercel
 
-The React frontend is deployed using:
-
-**Vercel**
-
-The frontend communicates with the deployed FastAPI backend.
+The React/Vite frontend is deployed through Vercel.
 
 Production API URL:
 
@@ -514,129 +322,33 @@ Production API URL:
 https://campushub-backend-mvns.onrender.com
 ```
 
----
-
-## Backend
-
-The FastAPI backend is deployed using:
-
-**Render**
-
-The backend provides REST APIs for:
-
-* Authentication
-* Clubs
-* Discussions
-* Events
-* Polls
-
----
-
-## Database
-
-The application uses PostgreSQL for persistent data storage.
-
-The database connection is configured using:
-
-```env
-DATABASE_URL=your_database_connection_string
-```
-
----
-
-# ⚙️ Environment Variables
-
-## Frontend
-
-Create:
-
-```text
-frontend/.env
-```
-
-Add:
-
-```env
-VITE_API_URL=http://127.0.0.1:8000
-```
-
-For production:
+The Vercel environment variable should be:
 
 ```env
 VITE_API_URL=https://campushub-backend-mvns.onrender.com
 ```
 
----
+## Backend — Render
 
-## Backend
+The FastAPI backend is deployed on Render.
 
-Create:
+The backend connects to the PostgreSQL database hosted through Supabase.
 
-```text
-backend/.env
-```
+## Database — Supabase
 
-Add:
+CampusHub uses PostgreSQL through Supabase.
 
-```env
-DATABASE_URL=your_database_url
-```
+Database configuration is provided through environment variables and should **never be committed to GitHub**.
 
 ---
 
-# 🚀 Running Locally
-
-## Backend
-
-Navigate to the backend:
-
-```bash
-cd backend
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Start FastAPI:
-
-```bash
-uvicorn main:app --reload
-```
-
-Backend:
-
-```text
-http://127.0.0.1:8000
-```
-
-Swagger API documentation:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
----
+# 💻 Local Development
 
 ## Frontend
 
-Open another terminal:
-
 ```bash
 cd frontend
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
-
-Start Vite:
-
-```bash
 npm run dev
 ```
 
@@ -646,130 +358,118 @@ Frontend:
 http://localhost:5173
 ```
 
----
+For local development, the frontend `.env` can contain:
 
-# 🧪 API Testing
+```env
+VITE_API_URL=http://127.0.0.1:8000
+```
 
-FastAPI automatically provides interactive API documentation.
+## Backend
 
-Open:
+```bash
+cd backend
+uvicorn main:app --reload
+```
+
+Backend:
+
+```text
+http://127.0.0.1:8000
+```
+
+FastAPI documentation:
 
 ```text
 http://127.0.0.1:8000/docs
 ```
 
-From there, APIs can be tested without the frontend.
+---
+
+# 🔒 Environment Variables
+
+Do **not** commit `.env` files containing credentials or database URLs.
+
+Example frontend:
+
+```env
+VITE_API_URL=http://127.0.0.1:8000
+```
+
+Production Vercel:
+
+```env
+VITE_API_URL=https://campushub-backend-mvns.onrender.com
+```
+
+Backend environment variables include database configuration and other deployment secrets.
 
 ---
 
-# 🎨 UI Design
+# 📌 Current Status
 
-CampusHub follows a consistent student-focused interface with:
+## Completed
 
-* Sidebar navigation
-* Navbar
-* Dashboard cards
-* Responsive layouts
-* Club cards
-* Event cards
-* Poll cards
-* Login/registration cards
-* Reusable components
-* Consistent styling across pages
+* [x] React + Vite frontend
+* [x] FastAPI backend
+* [x] PostgreSQL/Supabase integration
+* [x] User registration
+* [x] User login
+* [x] Dashboard
+* [x] Clubs
+* [x] Club details
+* [x] Club membership
+* [x] Club members
+* [x] Anonymous discussions
+* [x] Club events
+* [x] Poll creation
+* [x] Poll voting
+* [x] Profile
+* [x] Credits section
+* [x] Vercel frontend deployment
+* [x] Render backend deployment
+* [x] Supabase database
 
----
+## In Progress / Planned
 
-# 📌 Current Development Status
-
-| Module                     | Status        |
-| -------------------------- | ------------- |
-| React + Vite setup         | ✅ Complete    |
-| Routing                    | ✅ Complete    |
-| Login UI                   | ✅ Complete    |
-| Registration               | ✅ Complete    |
-| Backend authentication     | ✅ Complete    |
-| JWT authentication         | ✅ Complete    |
-| Dynamic username           | ✅ Complete    |
-| Dashboard                  | ✅ Complete    |
-| Clubs                      | ✅ Complete    |
-| Club creation              | ✅ Complete    |
-| Club details               | ✅ Complete    |
-| Club discussions           | ✅ Complete    |
-| Events                     | ✅ Complete    |
-| Poll creation              | ✅ Complete    |
-| Poll voting                | ✅ Complete    |
-| Dynamic poll results       | ✅ Complete    |
-| Profile route              | ✅ Implemented |
-| Backend APIs               | ✅ Implemented |
-| Database integration       | ✅ Implemented |
-| Render backend deployment  | ✅ Deployed    |
-| Vercel frontend deployment | ✅ Deployed    |
-
----
-
-# 🔮 Future Improvements
-
-Potential future enhancements include:
-
-* [ ] Complete user profile management
-* [ ] Profile picture upload
-* [ ] Club membership persistence
-* [ ] Prevent duplicate poll votes per user
-* [ ] Poll closing/expiration dates
-* [ ] Election administration
-* [ ] Real-time discussions using WebSockets
-* [ ] Notifications
-* [ ] Document sharing
-* [ ] Search and filtering
-* [ ] Admin dashboard
-* [ ] Role-based access control
-* [ ] Email verification
-* [ ] Password reset
-* [ ] Improved password hashing using Argon2
-* [ ] Better authentication middleware
-* [ ] Automated database migrations
-* [ ] Enhanced mobile responsiveness
+* [ ] Fully functional global event creation
+* [ ] Editable event locations
+* [ ] Interactive live event map
+* [ ] Dynamic announcements
+* [ ] Document management
+* [ ] More detailed dashboard analytics
+* [ ] Additional profile statistics
+* [ ] Improved event discovery
 
 ---
 
 # 👨‍💻 Development
 
-CampusHub is being developed as a full-stack student campus platform with a modular architecture.
+CampusHub is developed as a full-stack student-focused platform with a modular architecture.
 
 The project separates:
 
 ```text
 Frontend
-   ↓
+    ↓
 REST API
-   ↓
+    ↓
 FastAPI Backend
-   ↓
+    ↓
 SQLAlchemy
-   ↓
-PostgreSQL
+    ↓
+PostgreSQL / Supabase
 ```
 
-This architecture allows individual modules such as Clubs, Events, Polls, Discussions, and Authentication to be developed and extended independently.
+This architecture allows individual modules such as clubs, polls, events, and user profiles to be developed and extended independently.
 
 ---
 
-# 📄 License
+# 📜 License
 
-This project is currently developed as an academic/project application.
+This project is currently developed as a CampusHub project for educational and demonstration purposes.
 
-```
+---
 
-### One thing I deliberately changed
+## 🏛️ CampusHub
 
-I **didn't claim features that you haven't actually implemented yet as completed**. For example, I put:
-
-- Profile management → implemented as a route, but marked future improvements for the actual full profile functionality.
-- Email verification → future.
-- Prevent duplicate poll votes → future.
-- Real-time discussions → future.
-
-That's better for a GitHub README and especially for a project demonstration because you won't be asked to demonstrate something the README falsely says is complete.
-
-Also, your original README says **"CampusHub Frontend Handover"** and **"Backend not started"**, which is now completely outdated. The replacement above presents CampusHub as the **full-stack application it has become**.
-```
+**One Platform. Every Club. Every Voice.**
