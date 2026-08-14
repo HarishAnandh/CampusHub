@@ -14,7 +14,8 @@ from models import (
     ClubEvent,
     Poll,
     PollOption,
-    User
+    User,
+    ClubMember
 )
 app = FastAPI(title="CampusHub API")
 # -------------------------
@@ -113,6 +114,11 @@ def health():
 # -------------------------
 
 class ClubCreate(BaseModel):
+    name: str
+    description: str | None = None
+    category: str | None = None
+
+class ClubUpdate(BaseModel):
     name: str
     description: str | None = None
     category: str | None = None
@@ -305,6 +311,229 @@ def get_club(
 
     return club
 
+
+# -------------------------
+# Update club
+# -------------------------
+
+@app.put("/api/clubs/{club_id}")
+def update_club(
+    club_id: int,
+    club_data: ClubUpdate,
+    db: Session = Depends(get_db)
+):
+
+    club = (
+        db.query(Club)
+        .filter(Club.id == club_id)
+        .first()
+    )
+
+    if not club:
+        raise HTTPException(
+            status_code=404,
+            detail="Club not found"
+        )
+
+    club.name = club_data.name.strip()
+    club.description = club_data.description
+    club.category = club_data.category
+
+    db.commit()
+    db.refresh(club)
+
+    return club
+
+
+# -------------------------
+# Join club
+# -------------------------
+
+@app.post("/api/clubs/{club_id}/join")
+def join_club(
+    club_id: int,
+    username: str,
+    db: Session = Depends(get_db)
+):
+
+    club = (
+        db.query(Club)
+        .filter(Club.id == club_id)
+        .first()
+    )
+
+    if not club:
+        raise HTTPException(
+            status_code=404,
+            detail="Club not found"
+        )
+
+    user = (
+        db.query(User)
+        .filter(User.username == username)
+        .first()
+    )
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    existing_membership = (
+        db.query(ClubMember)
+        .filter(
+            ClubMember.user_id == user.id,
+            ClubMember.club_id == club_id
+        )
+        .first()
+    )
+
+    if existing_membership:
+        raise HTTPException(
+            status_code=400,
+            detail="Already a member of this club"
+        )
+
+    membership = ClubMember(
+        user_id=user.id,
+        club_id=club_id,
+        joined_at=datetime.utcnow()
+    )
+
+    db.add(membership)
+
+    club.members = (
+        db.query(ClubMember)
+        .filter(ClubMember.club_id == club_id)
+        .count()
+        + 1
+    )
+
+    db.commit()
+
+    return {
+        "message": "Joined club successfully",
+        "club_id": club_id,
+        "username": user.username,
+        "members": club.members
+    }
+
+
+# -------------------------
+# Leave club
+# -------------------------
+
+@app.delete("/api/clubs/{club_id}/join")
+def leave_club(
+    club_id: int,
+    username: str,
+    db: Session = Depends(get_db)
+):
+
+    user = (
+        db.query(User)
+        .filter(User.username == username)
+        .first()
+    )
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    membership = (
+        db.query(ClubMember)
+        .filter(
+            ClubMember.user_id == user.id,
+            ClubMember.club_id == club_id
+        )
+        .first()
+    )
+
+    if not membership:
+        raise HTTPException(
+            status_code=400,
+            detail="You are not a member of this club"
+        )
+
+    db.delete(membership)
+    db.commit()
+
+    member_count = (
+        db.query(ClubMember)
+        .filter(ClubMember.club_id == club_id)
+        .count()
+    )
+
+    club = (
+        db.query(Club)
+        .filter(Club.id == club_id)
+        .first()
+    )
+
+    if club:
+        club.members = member_count
+        db.commit()
+
+    return {
+        "message": "Left club successfully",
+        "club_id": club_id,
+        "members": member_count
+    }
+
+
+# -------------------------
+# Get club members
+# -------------------------
+
+@app.get("/api/clubs/{club_id}/members")
+def get_club_members(
+    club_id: int,
+    db: Session = Depends(get_db)
+):
+
+    members = (
+        db.query(User)
+        .join(
+            ClubMember,
+            ClubMember.user_id == User.id
+        )
+        .filter(ClubMember.club_id == club_id)
+        .all()
+    )
+
+    return [
+        {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email
+        }
+        for user in members
+    ]
+
+
+# -------------------------
+# Get all users
+# -------------------------
+
+@app.get("/api/users")
+def get_users(
+    db: Session = Depends(get_db)
+):
+
+    users = db.query(User).order_by(User.username.asc()).all()
+
+    return [
+        {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "created_at": user.created_at
+        }
+        for user in users
+    ]
 # -------------------------
 # Club Posts
 # -------------------------

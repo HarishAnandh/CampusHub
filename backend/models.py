@@ -1,4 +1,12 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Text,
+    DateTime,
+    ForeignKey,
+    UniqueConstraint
+)
 from database import Base
 
 
@@ -62,3 +70,32 @@ class User(Base):
     email = Column(String, unique=True, nullable=False, index=True)
     password_hash = Column(String, nullable=False)
     created_at = Column(DateTime)
+
+
+class ClubMember(Base):
+    __tablename__ = "club_members"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False
+    )
+
+    club_id = Column(
+        Integer,
+        ForeignKey("clubs.id", ondelete="CASCADE"),
+        nullable=False
+    )
+
+    joined_at = Column(DateTime)
+
+    __table_args__ = (
+        UniqueConstraint(
+            "user_id",
+            "club_id",
+            name="unique_user_club"
+        ),
+    )
+

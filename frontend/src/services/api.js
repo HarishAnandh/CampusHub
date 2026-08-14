@@ -99,22 +99,26 @@ export async function getPolls() {
 
 
 export async function createPoll(poll) {
-  const response = await fetch(
-    `${API_URL}/api/polls`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(poll),
-    }
-  );
+  const response = await fetch(`${API_URL}/api/polls`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(poll),
+  });
+
+  const data = await response.json();
+
+  console.log("CREATE POLL STATUS:", response.status);
+  console.log("CREATE POLL RESPONSE:", data);
 
   if (!response.ok) {
-    throw new Error("Failed to create poll");
+    throw new Error(
+      data.detail || `Failed to create poll (${response.status})`
+    );
   }
 
-  return response.json();
+  return data;
 }
 
 
@@ -187,4 +191,91 @@ function authHeaders() {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
+}
+
+
+// -------------------------
+// Club Management
+// -------------------------
+
+export async function updateClub(clubId, club) {
+  const response = await fetch(`${API_URL}/api/clubs/${clubId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(club),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to update club");
+  }
+
+  return data;
+}
+
+
+export async function joinClub(clubId, username) {
+  const response = await fetch(
+    `${API_URL}/api/clubs/${clubId}/join?username=${encodeURIComponent(username)}`,
+    {
+      method: "POST",
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to join club");
+  }
+
+  return data;
+}
+
+
+export async function leaveClub(clubId, username) {
+  const response = await fetch(
+    `${API_URL}/api/clubs/${clubId}/join?username=${encodeURIComponent(username)}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to leave club");
+  }
+
+  return data;
+}
+
+
+export async function getClubMembers(clubId) {
+  const response = await fetch(
+    `${API_URL}/api/clubs/${clubId}/members`
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to fetch club members");
+  }
+
+  return data;
+}
+
+
+export async function getUsers() {
+  const response = await fetch(`${API_URL}/api/users`);
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to fetch users");
+  }
+
+  return data;
 }
