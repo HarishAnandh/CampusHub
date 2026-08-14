@@ -90,3 +90,197 @@
     border-radius:8px;
     cursor:pointer;
 }
+
+/* ================================
+   EVENT MAP
+================================ */
+
+.event-map-section {
+    margin-top: 24px;
+    margin-bottom: 28px;
+  }
+  
+  .map-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  
+  .map-heading h2 {
+    margin: 0;
+    font-size: 22px;
+  }
+  
+  .map-heading p {
+    margin: 5px 0 0;
+    color: #777;
+  }
+  
+  .map-live {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2e8b57;
+    background: #eaf7ef;
+    padding: 8px 14px;
+    border-radius: 20px;
+  }
+  
+  .event-map {
+    width: 100%;
+    height: 430px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  }
+  
+  .event-map .leaflet-container {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* ================================
+     MAP POPUP
+  ================================ */
+  
+  .map-popup {
+    min-width: 160px;
+  }
+  
+  .map-popup strong {
+    font-size: 15px;
+  }
+  
+  .map-popup p {
+    margin: 6px 0 10px;
+    color: #666;
+  }
+  
+  .map-popup button {
+    border: none;
+    background: #111827;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  
+  /* ================================
+     EVENT CARDS
+  ================================ */
+  
+  .event-card-wrapper {
+    cursor: pointer;
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .event-card-wrapper:hover {
+    transform: translateY(-2px);
+  }
+  
+  .event-card-wrapper.selected-event {
+    outline: 2px solid #111827;
+    outline-offset: 3px;
+  }
+  
+  /* ================================
+     SELECTED EVENT
+  ================================ */
+  
+  .selected-event-section {
+    margin-top: 30px;
+    padding: 28px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  }
+  
+  .selected-event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .selected-event-header h2 {
+    margin: 8px 0 4px;
+    font-size: 28px;
+  }
+  
+  .selected-club {
+    margin: 0;
+    color: #777;
+  }
+  
+  .selected-category {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background: #f1f1f1;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .close-event-btn {
+    border: none;
+    background: #f3f3f3;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .event-info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  
+  .event-info-row span {
+    padding: 9px 13px;
+    border-radius: 10px;
+    background: #f7f7f7;
+    font-size: 14px;
+  }
+  
+  .event-description {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .event-description h3 {
+    margin-bottom: 8px;
+  }
+  
+  .event-description p {
+    line-height: 1.7;
+    color: #555;
+  }
+  
+  /* ================================
+     MOBILE
+  ================================ */
+  
+  @media (max-width: 768px) {
+    .event-map {
+      height: 320px;
+    }
+  
+    .map-heading {
+      align-items: flex-start;
+      gap: 12px;
+    }
+  
+    .event-info-row {
+      flex-direction: column;
+    }
+  
+    .selected-event-section {
+      padding: 20px;
+    }
+  }
