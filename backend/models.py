@@ -39,7 +39,7 @@ class Poll(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     question = Column(Text, nullable=False)
-    created_by = Column(String, nullable=False)
+    created_by = Column(String, nullable=True)
     created_at = Column(DateTime)
 
 
