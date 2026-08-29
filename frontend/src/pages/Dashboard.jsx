@@ -116,6 +116,8 @@ function Dashboard() {
 
   const gridValues = [0, 10, 20, 30, 40];
 
+
+  
   /* --------------------------------
      STATS
      -------------------------------- */
@@ -364,7 +366,39 @@ function Dashboard() {
               )}
 
             </section>
+            <section className="dashboard-panel dashboard-radar">
 
+<div className="radar-header">
+
+  <div>
+    <h3>Campus Activity Radar</h3>
+    <p>Live campus activity scan</p>
+  </div>
+
+  <span className="radar-status">
+    ● ACTIVE
+  </span>
+
+</div>
+
+<div className="radar">
+
+  <div className="radar-ring ring-1"></div>
+  <div className="radar-ring ring-2"></div>
+  <div className="radar-ring ring-3"></div>
+
+  <div className="radar-line"></div>
+
+  <span className="radar-dot dot-1"></span>
+  <span className="radar-dot dot-2"></span>
+  <span className="radar-dot dot-3"></span>
+  <span className="radar-dot dot-4"></span>
+
+  <div className="radar-center"></div>
+
+</div>
+
+</section>
           </div>
 
           {/* RIGHT SIDE */}
@@ -386,6 +420,8 @@ function Dashboard() {
                 </div>
 
               </div>
+
+              
 
               {loading ? (
 
@@ -551,6 +587,8 @@ function Dashboard() {
       </main>
 
     </div>
+
+    
   );
 }
 
