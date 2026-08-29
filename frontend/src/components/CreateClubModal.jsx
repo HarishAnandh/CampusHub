@@ -23,6 +23,7 @@ function CreateClubModal({ onClose, onCreate }) {
       await onCreate({
         name: club.name,
         category: club.category,
+        icon: club.icon,
       });
     } catch (error) {
       console.error(error);
@@ -37,6 +38,7 @@ function CreateClubModal({ onClose, onCreate }) {
         <h2>Create Club</h2>
 
         <form onSubmit={handleSubmit}>
+
           <input
             placeholder="Club Name"
             value={club.name}
@@ -85,6 +87,7 @@ function CreateClubModal({ onClose, onCreate }) {
               {creating ? "Creating..." : "Create Club"}
             </button>
           </div>
+
         </form>
       </div>
     </div>

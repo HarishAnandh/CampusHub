@@ -1,17 +1,27 @@
 import { FaBell, FaUserCircle } from "react-icons/fa";
 
 function Navbar({ title }) {
+  const username = localStorage.getItem("username") || "User";
+
   return (
     <header className="navbar">
-      <h2>{title}</h2>
+      <div className="navbar-title">
+        <h2>{title}</h2>
+      </div>
 
       <div className="nav-right">
-        <FaBell className="icon" />
+        <button className="notification-btn" aria-label="Notifications">
+          <FaBell />
+          <span className="notification-dot"></span>
+        </button>
+
         <div className="user-profile">
           <FaUserCircle className="profile-icon" />
-          <span>
-  {localStorage.getItem("username") || "User"}
-</span>
+
+          <div className="user-info">
+            <span className="user-name">{username}</span>
+            <span className="user-role">Student</span>
+          </div>
         </div>
       </div>
     </header>

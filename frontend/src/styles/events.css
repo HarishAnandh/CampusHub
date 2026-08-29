@@ -1,286 +1,475 @@
-.event-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
+/* =========================
+   EVENTS PAGE
+========================= */
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
-.event-header h1{
-    margin:0;
+.event-header h1 {
+  margin: 0;
+  color: var(--text-primary);
 }
 
-.event-header p{
-    color:#6b7280;
-    margin-top:5px;
+.event-header p {
+  margin-top: 6px;
+  color: var(--text-secondary);
 }
 
-.create-btn{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 18px;
-    border-radius:10px;
-    cursor:pointer;
+
+/* =========================
+   CREATE BUTTON
+========================= */
+
+.create-btn {
+  border: none;
+  background: var(--primary);
+  color: white;
+
+  padding: 10px 16px;
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
 }
 
-.search-box{
-    width:100%;
-    padding:14px;
-    border:1px solid #d1d5db;
-    border-radius:10px;
-    margin-bottom:25px;
-    font-size:15px;
+.create-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
 }
 
-.events-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
-    gap:20px;
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: white;
+  color: var(--text-primary);
+
+  font-size: 14px;
+
+  margin-bottom: 24px;
+
+  outline: none;
+
+  transition: 0.2s ease;
 }
 
-.event-card{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+.search-box:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(53, 107, 122, 0.10);
 }
 
-.event-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
-}
 
-.event-category{
-    background:#e0f2fe;
-    color:#0369a1;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:13px;
-}
-
-.event-card p{
-    margin:8px 0;
-    color:#4b5563;
-}
-
-.event-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.view-btn{
-    flex:1;
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.register-btn{
-    flex:1;
-    background:#10b981;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-/* ================================
-   EVENT MAP
-================================ */
+/* =========================
+   MAP SECTION
+========================= */
 
 .event-map-section {
-    margin-top: 24px;
-    margin-bottom: 28px;
-  }
-  
-  .map-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-  }
-  
-  .map-heading h2 {
-    margin: 0;
-    font-size: 22px;
-  }
-  
-  .map-heading p {
-    margin: 5px 0 0;
-    color: #777;
-  }
-  
-  .map-live {
-    font-size: 13px;
-    font-weight: 600;
-    color: #2e8b57;
-    background: #eaf7ef;
-    padding: 8px 14px;
-    border-radius: 20px;
-  }
-  
-  .event-map {
-    width: 100%;
-    height: 430px;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  }
-  
-  .event-map .leaflet-container {
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* ================================
-     MAP POPUP
-  ================================ */
-  
-  .map-popup {
-    min-width: 160px;
-  }
-  
-  .map-popup strong {
-    font-size: 15px;
-  }
-  
-  .map-popup p {
-    margin: 6px 0 10px;
-    color: #666;
-  }
-  
-  .map-popup button {
-    border: none;
-    background: #111827;
-    color: white;
-    padding: 7px 12px;
-    border-radius: 7px;
-    cursor: pointer;
-  }
-  
-  /* ================================
-     EVENT CARDS
-  ================================ */
-  
-  .event-card-wrapper {
-    cursor: pointer;
-    border-radius: 14px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .event-card-wrapper:hover {
-    transform: translateY(-2px);
-  }
-  
-  .event-card-wrapper.selected-event {
-    outline: 2px solid #111827;
-    outline-offset: 3px;
-  }
-  
-  /* ================================
-     SELECTED EVENT
-  ================================ */
-  
-  .selected-event-section {
-    margin-top: 30px;
-    padding: 28px;
-    border-radius: 18px;
-    background: white;
-    border: 1px solid #e7e7e7;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-  }
-  
-  .selected-event-header {
-    display: flex;
-    justify-content: space-between;
+  margin: 26px 0 28px;
+  padding: 20px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  box-shadow: var(--shadow);
+}
+
+.map-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 16px;
+}
+
+.map-heading h2 {
+  margin: 0;
+
+  font-size: 21px;
+  color: var(--text-primary);
+}
+
+.map-heading p {
+  margin: 5px 0 0;
+
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.map-live {
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  background: #edf7f5;
+  color: var(--secondary);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   DOUBLE FRAME MAP
+========================= */
+
+.event-map {
+  width: 100%;
+  height: 430px;
+
+  padding: 5px;
+
+  background: var(--bg-card);
+
+  border: 2px solid var(--secondary);
+  border-radius: 16px;
+
+  box-shadow:
+    0 0 0 1px rgba(53, 107, 122, 0.18),
+    0 10px 25px rgba(58, 48, 43, 0.10);
+
+  overflow: hidden;
+}
+
+
+/* Inner frame */
+
+.event-map .leaflet-container {
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid rgba(53, 107, 122, 0.45);
+  border-radius: 11px;
+
+  overflow: hidden;
+}
+
+
+/* =========================
+   MAP POPUP
+========================= */
+
+.map-popup {
+  min-width: 170px;
+}
+
+.map-popup strong {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.map-popup p {
+  margin: 6px 0 10px;
+  color: var(--text-secondary);
+}
+
+.map-popup button {
+  border: none;
+
+  background: var(--secondary);
+  color: white;
+
+  padding: 7px 12px;
+
+  border-radius: 7px;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.map-popup button:hover {
+  background: var(--secondary-hover);
+}
+
+
+/* =========================
+   EVENTS GRID
+========================= */
+
+.events-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(300px, 1fr));
+
+  gap: 20px;
+}
+
+.event-card-wrapper {
+  cursor: pointer;
+
+  border-radius: 14px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.event-card-wrapper:hover {
+  transform: translateY(-3px);
+}
+
+.event-card-wrapper.selected-event {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+
+/* =========================
+   EVENT CARD
+========================= */
+
+.event-card {
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  padding: 20px;
+
+  box-shadow: var(--shadow);
+
+  transition: 0.2s ease;
+}
+
+.event-card:hover {
+  box-shadow:
+    0 12px 28px rgba(58, 48, 43, 0.12);
+}
+
+.event-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 14px;
+}
+
+.event-category {
+  background: #edf7f5;
+  color: var(--secondary);
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.event-card p {
+  margin: 8px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.event-buttons {
+  display: flex;
+  gap: 9px;
+
+  margin-top: 18px;
+}
+
+.view-btn,
+.register-btn {
+  border: none;
+
+  padding: 9px 13px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.view-btn {
+  flex: 1;
+
+  background: var(--secondary);
+  color: white;
+}
+
+.view-btn:hover {
+  background: var(--secondary-hover);
+}
+
+.register-btn {
+  flex: 1;
+
+  background: var(--primary);
+  color: white;
+}
+
+.register-btn:hover {
+  background: var(--primary-hover);
+}
+
+
+/* =========================
+   SELECTED EVENT
+========================= */
+
+.selected-event-section {
+  margin-top: 30px;
+
+  padding: 26px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  box-shadow: var(--shadow);
+}
+
+.selected-event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.selected-event-header h2 {
+  margin: 8px 0 4px;
+
+  font-size: 26px;
+  color: var(--text-primary);
+}
+
+.selected-club {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.selected-category {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 15px;
+
+  background: #edf7f5;
+  color: var(--secondary);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.close-event-btn {
+  border: none;
+
+  background: #f4f6f7;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  color: var(--text-primary);
+
+  transition: 0.2s ease;
+}
+
+.close-event-btn:hover {
+  background: #e8edef;
+}
+
+.event-info-row {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+.event-info-row span {
+  padding: 8px 12px;
+
+  border-radius: 9px;
+
+  background: #f6f8f8;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}
+
+.event-description {
+  margin-top: 24px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid var(--border);
+}
+
+.event-description h3 {
+  margin-bottom: 8px;
+}
+
+.event-description p {
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .event-header {
     align-items: flex-start;
+    gap: 15px;
   }
-  
-  .selected-event-header h2 {
-    margin: 8px 0 4px;
-    font-size: 28px;
+
+  .event-map-section {
+    padding: 15px;
   }
-  
-  .selected-club {
-    margin: 0;
-    color: #777;
+
+  .event-map {
+    height: 320px;
+    padding: 4px;
   }
-  
-  .selected-category {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 15px;
-    background: #f1f1f1;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  
-  .close-event-btn {
-    border: none;
-    background: #f3f3f3;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .event-info-row {
-    display: flex;
-    flex-wrap: wrap;
+
+  .map-heading {
+    align-items: flex-start;
     gap: 12px;
-    margin-top: 22px;
   }
-  
-  .event-info-row span {
-    padding: 9px 13px;
-    border-radius: 10px;
-    background: #f7f7f7;
-    font-size: 14px;
+
+  .event-info-row {
+    flex-direction: column;
   }
-  
-  .event-description {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+
+  .selected-event-section {
+    padding: 20px;
   }
-  
-  .event-description h3 {
-    margin-bottom: 8px;
-  }
-  
-  .event-description p {
-    line-height: 1.7;
-    color: #555;
-  }
-  
-  /* ================================
-     MOBILE
-  ================================ */
-  
-  @media (max-width: 768px) {
-    .event-map {
-      height: 320px;
-    }
-  
-    .map-heading {
-      align-items: flex-start;
-      gap: 12px;
-    }
-  
-    .event-info-row {
-      flex-direction: column;
-    }
-  
-    .selected-event-section {
-      padding: 20px;
-    }
-  }
+
+}

@@ -1,18 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
 import "../styles/profile.css";
 
 function Profile() {
   const navigate = useNavigate();
-
-  const username = localStorage.getItem("username");
+  const username = localStorage.getItem("username") || "User";
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-
     navigate("/login");
   };
 
@@ -20,98 +17,201 @@ function Profile() {
     {
       name: "Harish Anandh",
       role: "Founder & Developer",
-      image: "https://media.licdn.com/dms/image/v2/D4D03AQG66hyrbAZa4Q/profile-displayphoto-crop_800_800/B4DZ_AxEZyIYAI-/0/1785645520784?e=1788393600&v=beta&t=DTgi_FK0au-G9NczU0enz1Eknm-d48llUdFA32HxuUY",
+      image:
+        "https://media.licdn.com/dms/image/v2/D4D03AQG66hyrbAZa4Q/profile-displayphoto-crop_800_800/B4DZ_AxEZyIYAI-/0/1785645520784?e=1788393600&v=beta&t=DTgi_FK0au-G9NczU0enz1Eknm-d48llUdFA32HxuUY",
     },
     {
       name: "Shanmugavel M",
       role: "CEO, Tech Head",
-      image: "https://th.bing.com/th/id/OIP.i_sA55b7v1PJwZ8vl9YGhgAAAA?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+      image:
+        "https://th.bing.com/th/id/OIP.i_sA55b7v1PJwZ8vl9YGhgAAAA?r=0&o=7&rm=3&rs=1&pid=ImgDetMain",
     },
     {
       name: "Stefon S",
       role: "CMO & Logistics",
-      image: "https://media.licdn.com/dms/image/v2/D4E03AQHaLBI4tbRrNg/profile-displayphoto-crop_800_800/B4EZut7p_wMAAM-/0/1768149656532?e=1788393600&v=beta&t=9TQDu0emQR0tYKxQIU5P2PItvQIWgqRxS5Qr5gGcn20",
+      image:
+        "https://media.licdn.com/dms/image/v2/D4E03AQHaLBI4tbRrNg/profile-displayphoto-crop_800_800/B4EZut7p_wMAAM-/0/1768149656532?e=1788393600&v=beta&t=9TQDu0emQR0tYKxQIU5P2PItvQIWgqRxS5Qr5gGcn20",
+    },
+  ];
+
+  // Temporary data until the joined-clubs API is connected.
+  const joinedClubs = [
+    {
+      name: "Coding Club",
+      category: "Technology",
+      icon: "💻",
+    },
+    {
+      name: "AI Club",
+      category: "Artificial Intelligence",
+      icon: "🤖",
+    },
+    {
+      name: "IEEE",
+      category: "Engineering",
+      icon: "⚡",
     },
   ];
 
   return (
     <div className="dashboard-layout">
-
       <Sidebar />
 
       <main className="dashboard-content">
-
         <Navbar title="Profile" />
 
         <div className="profile-page">
 
-          {/* PROFILE HEADER */}
+          {/* PLAYER PROFILE CARD */}
+          <section className="player-card">
 
-          <div className="profile-header">
-
-            <div className="profile-avatar">
-              {username?.charAt(0).toUpperCase() || "U"}
-            </div>
-
-            <div>
-              <h1>{username || "User"}</h1>
-              <p>@{username || "user"}</p>
-            </div>
-
-          </div>
-
-          {/* PROFILE INFORMATION */}
-
-          <div className="profile-grid">
-
-            <div className="profile-card">
-
-              <h2>👤 Account</h2>
-
-              <div className="profile-info">
-                <span>Username</span>
-                <strong>{username || "Not available"}</strong>
+            <div className="player-card-top">
+              <div className="player-avatar">
+                {username.charAt(0).toUpperCase()}
               </div>
 
-              <div className="profile-info">
-                <span>Email</span>
-                <strong>Loading from account...</strong>
+              <div className="player-info">
+                <div className="player-label">
+                  CAMPUSHUB MEMBER
+                </div>
+
+                <h1>{username}</h1>
+
+                <p>@{username}</p>
+
+                <span className="player-status">
+                  ● Active on Campus
+                </span>
+              </div>
+
+              <div className="player-level">
+                <span>LEVEL</span>
+                <strong>08</strong>
+              </div>
+            </div>
+
+            {/* XP / ACTIVITY */}
+            <div className="xp-section">
+              <div className="xp-header">
+                <span>Campus Activity</span>
+                <strong>760 XP</strong>
+              </div>
+
+              <div className="xp-bar">
+                <div className="xp-fill"></div>
+              </div>
+
+              <div className="xp-footer">
+                <span>Keep participating!</span>
+                <span>76%</span>
+              </div>
+            </div>
+
+            {/* STATS */}
+            <div className="player-stats">
+
+              <div className="player-stat">
+                <span className="stat-icon">🏛️</span>
+                <strong>0</strong>
+                <small>Clubs Joined</small>
+              </div>
+
+              <div className="player-stat">
+                <span className="stat-icon">📅</span>
+                <strong>0</strong>
+                <small>Events</small>
+              </div>
+
+              <div className="player-stat">
+                <span className="stat-icon">🗳️</span>
+                <strong>0</strong>
+                <small>Polls</small>
+              </div>
+
+              <div className="player-stat">
+                <span className="stat-icon">💬</span>
+                <strong>0</strong>
+                <small>Posts</small>
               </div>
 
             </div>
 
-            <div className="profile-card">
+          </section>
 
-              <h2>🏛️ CampusHub Activity</h2>
+          {/* ACCOUNT */}
+          <section className="profile-card account-card">
 
-              <div className="profile-stats">
-
-                <div>
-                  <strong>0</strong>
-                  <span>Clubs Joined</span>
-                </div>
-
-                <div>
-                  <strong>0</strong>
-                  <span>Events</span>
-                </div>
-
-                <div>
-                  <strong>0</strong>
-                  <span>Polls</span>
-                </div>
-
+            <div className="section-heading">
+              <div>
+                <span className="section-kicker">ACCOUNT</span>
+                <h2>Player Information</h2>
               </div>
+
+              <span className="section-badge">✓ Verified</span>
+            </div>
+
+            <div className="profile-info">
+              <span>Username</span>
+              <strong>{username}</strong>
+            </div>
+
+            <div className="profile-info">
+              <span>Email</span>
+              <strong>Loading from account...</strong>
+            </div>
+
+          </section>
+
+          {/* JOINED CLUBS */}
+          <section className="profile-card clubs-profile-card">
+
+            <div className="section-heading">
+              <div>
+                <span className="section-kicker">CAMPUS</span>
+                <h2>My Clubs</h2>
+              </div>
+
+              <button
+                className="browse-clubs-btn"
+                onClick={() => navigate("/clubs")}
+              >
+                Browse Clubs →
+              </button>
+            </div>
+
+            <div className="joined-clubs">
+
+              {joinedClubs.map((club) => (
+                <div
+                  className="joined-club"
+                  key={club.name}
+                >
+                  <div className="club-game-icon">
+                    {club.icon}
+                  </div>
+
+                  <div>
+                    <h3>{club.name}</h3>
+                    <p>{club.category}</p>
+                  </div>
+
+                  <span className="member-badge">
+                    MEMBER
+                  </span>
+                </div>
+              ))}
 
             </div>
 
-          </div>
+          </section>
 
           {/* ACCOUNT SETTINGS */}
+          <section className="profile-card settings-card">
 
-          <div className="profile-card">
-
-            <h2>⚙️ Account Settings</h2>
+            <div>
+              <span className="section-kicker">SETTINGS</span>
+              <h2>Account Settings</h2>
+            </div>
 
             <button
               className="logout-btn"
@@ -120,13 +220,17 @@ function Profile() {
               🚪 Logout
             </button>
 
-          </div>
+          </section>
 
           {/* CREDITS */}
+          <section className="profile-card credits-section">
 
-          <div className="profile-card credits-section">
-
-            <h2>✨ Credits</h2>
+            <div className="section-heading">
+              <div>
+                <span className="section-kicker">CREDITS</span>
+                <h2>Behind CampusHub</h2>
+              </div>
+            </div>
 
             <p className="credits-subtitle">
               The team behind CampusHub
@@ -139,7 +243,6 @@ function Profile() {
                   className="credit-card"
                   key={person.name}
                 >
-
                   <img
                     src={person.image}
                     alt={person.name}
@@ -147,26 +250,20 @@ function Profile() {
                   />
 
                   <h3>{person.name}</h3>
-
                   <p>{person.role}</p>
-
                 </div>
               ))}
 
             </div>
 
-          </div>
-
-          {/* PRODUCT CREDIT */}
+          </section>
 
           <div className="product-credit">
             A Hector Product
           </div>
 
         </div>
-
       </main>
-
     </div>
   );
 }

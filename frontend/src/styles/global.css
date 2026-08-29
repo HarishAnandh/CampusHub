@@ -1,21 +1,209 @@
+/* =========================
+   CAMPUSHUB DESIGN SYSTEM
+========================= */
+
+:root {
+  --bg-primary: #f1f5ff;
+  --bg-card: #ffffff;
+
+  --sidebar-bg: #3b3218;
+
+  --text-primary: #3a302b;
+  --text-secondary: #77716d;
+  --text-light: #ffffff;
+
+  --primary: #ff7f27;
+  --primary-hover: #e96f1d;
+
+  --secondary: #356b7a;
+  --secondary-hover: #2d5966;
+
+  --border: #e5e7eb;
+
+  --shadow: 0 8px 24px rgba(58, 48, 43, 0.08);
+}
+
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+
+
+/* =========================
+   GLOBAL NAVBAR
+========================= */
+
+.navbar {
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 26px;
+  margin-bottom: 28px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  box-shadow: var(--shadow);
+}
+
+.navbar-title h2 {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+
+/* Right side */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+
+/* Notification */
+
+.notification-btn {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #f8fafb;
+  color: var(--secondary);
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.notification-btn:hover {
+  background: #edf3f4;
+  transform: translateY(-1px);
+}
+
+
+/* Small notification indicator */
+
+.notification-dot {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+}
+
+
+/* User */
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding-left: 16px;
+
+  border-left: 1px solid var(--border);
+}
+
+.profile-icon {
+  font-size: 32px;
+  color: var(--secondary);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+
+  line-height: 1.2;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+.user-role {
+  margin-top: 3px;
+
+  font-size: 11px;
+
+  color: var(--text-secondary);
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+  .navbar {
+    padding: 0 16px;
   }
-  
-  body {
-    background: #f4f7fb;
-    color: #1e293b;
+
+  .navbar-title h2 {
+    font-size: 17px;
   }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
+
+  .user-info {
+    display: none;
   }
-  
-  button {
-    cursor: pointer;
-    font-family: inherit;
+
+  .user-profile {
+    padding-left: 10px;
   }
+
+  .profile-icon {
+    font-size: 30px;
+  }
+}

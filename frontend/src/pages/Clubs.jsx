@@ -20,18 +20,7 @@ function Clubs() {
   }, []);
 
   const addIcons = (clubs) => {
-    return clubs.map((club) => ({
-      ...club,
-      icon:
-        club.icon ||
-        (club.category === "Technology"
-          ? "💻"
-          : club.category === "Cultural"
-          ? "🎭"
-          : club.category === "Sports"
-          ? "🏆"
-          : "🏛️"),
-    }));
+    return clubs;
   };
 
   const loadClubs = async () => {
@@ -48,8 +37,11 @@ function Clubs() {
 
   const handleCreateClub = async (clubData) => {
     try {
-      const newClub = await createClub(clubData);
-
+      const newClub = await createClub({
+        name: clubData.name,
+        category: clubData.category,
+      });
+  
       const clubWithIcon = {
         ...newClub,
         icon:
@@ -62,12 +54,12 @@ function Clubs() {
             ? "🏆"
             : "🏛️"),
       };
-
+  
       setClubs((prevClubs) => [
         ...prevClubs,
         clubWithIcon,
       ]);
-
+  
       setShowModal(false);
     } catch (err) {
       console.error(err);
@@ -75,7 +67,6 @@ function Clubs() {
       throw err;
     }
   };
-
   return (
     <div className="dashboard-layout">
       <Sidebar />

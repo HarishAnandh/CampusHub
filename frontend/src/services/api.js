@@ -279,3 +279,28 @@ export async function getUsers() {
 
   return data;
 }
+export async function uploadClubImage(clubId, file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(
+    `${API_URL}/api/clubs/${clubId}/image`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to upload club image");
+  }
+
+  return data;
+}
