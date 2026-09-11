@@ -1,139 +1,471 @@
-.club-details{
-    background:white;
-    padding:35px;
-    border-radius:16px;
-    box-shadow:0 10px 20px rgba(0,0,0,.05);
-    }
-    
-    .club-details h1{
-    font-size:34px;
-    margin-bottom:10px;
-    }
-    
-    .category{
-    color:#64748b;
-    margin-bottom:25px;
-    }
-    
-    .stats{
-    display:flex;
-    gap:40px;
-    margin-bottom:35px;
-    }
-    
-    .stats div{
-    background:#f8fafc;
-    padding:18px;
-    border-radius:12px;
-    width:150px;
-    text-align:center;
-    }
-    
-    section{
-    margin-top:30px;
-    }
-    
-    section h2 {
-  margin-bottom: 10px;
-  color: #800000;
+.club-details {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px;
 }
-    
-    section ul{
-    padding-left:20px;
-    }
-    
-    section li{
-    margin-bottom:8px;
-    }
 
-/* Club title */
+/* =========================
+   CLUB HEADER
+========================= */
 
 .club-title-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  animation: clubFadeIn 0.45s ease;
+}
+
+.club-title-row h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.club-title-row .category {
+  margin: 7px 0 0;
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Edit button */
+
+.edit-club-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 9px;
+  background: #f3f4f6;
+  color: var(--text-primary);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-club-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 170px);
+  gap: 16px;
+  margin: 22px 0 30px;
+}
+
+.stats div {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stats div:hover {
+  transform: translateY(-3px);
+}
+
+.stats h3 {
+  margin: 0;
+  font-size: 25px;
+  color: var(--primary);
+}
+
+.stats p {
+  margin: 5px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+.club-details section {
+  margin-top: 22px;
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  animation: clubFadeIn 0.5s ease;
+}
+
+.club-details section h2 {
+  margin: 0 0 12px;
+  color: var(--text-primary);
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.club-details section > p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* =========================
+   SECTION HEADER
+========================= */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+}
+
+.section-header p {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* =========================
+   EVENT FORM / EDIT FORM
+========================= */
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 18px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  animation: formSlide 0.25s ease;
+}
+
+.event-form h2 {
+  margin-bottom: 3px;
+}
+
+.event-form input,
+.event-form textarea,
+.club-details textarea {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-form textarea,
+.club-details section textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.event-form input:focus,
+.event-form textarea:focus,
+.club-details textarea:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(53, 107, 122, 0.1);
+}
+
+.event-form button,
+.club-details section form button {
+  align-self: flex-start;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 9px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.event-form button:hover,
+.club-details section form button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   ADD EVENT BUTTON
+========================= */
+
+.club-details .join-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 9px;
+  background: var(--secondary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.club-details .join-btn:hover {
+  background: var(--secondary-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   EVENTS
+========================= */
+
+.club-details section ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.club-details section li {
+  margin: 0;
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: 0.2s ease;
+}
+
+.club-details section li:hover {
+  transform: translateX(3px);
+  border-color: rgba(53, 107, 122, 0.35);
+}
+
+.club-details section li strong {
+  color: var(--text-primary);
+}
+
+.club-details section li span {
+  color: var(--text-secondary);
+}
+
+.club-details section li small {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.club-details section li p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+/* =========================
+   CLUB DISCUSSION
+========================= */
+
+.club-details section form {
+  margin-top: 15px;
+}
+
+.club-details section form textarea {
+  min-height: 105px;
+  margin-bottom: 10px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.post-card {
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(58, 48, 43, 0.07);
+}
+
+.post-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.post-card p {
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.post-card small {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+/* =========================
+   MEMBERS
+========================= */
+
+.club-members-section {
+  margin-top: 22px;
+  padding-top: 24px;
+}
+
+.club-members-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.club-member-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: 0.2s ease;
+}
+
+.club-member-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 127, 39, 0.35);
+}
+
+.member-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--secondary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.club-member-card strong {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.club-member-card p {
+  margin: 3px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+/* =========================
+   JOIN / LEAVE
+========================= */
+
+.club-details > .join-btn:last-child {
+  display: block;
+  min-width: 140px;
+  margin: 24px auto 5px;
+  padding: 12px 20px;
+  font-size: 14px;
+  box-shadow: 0 5px 14px rgba(53, 107, 122, 0.15);
+}
+
+.club-details > .join-btn:last-child:hover {
+  transform: translateY(-2px);
+}
+
+.club-details > .join-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes clubFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-  
-  .edit-club-btn {
-    border: none;
-    padding: 10px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #f1f1f1;
-    font-weight: 600;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .edit-club-btn:hover {
-    background: #e5e5e5;
+}
+
+@keyframes formSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
   }
-  
-  /* Members */
-  
-  .club-members-section {
-    margin-top: 35px;
-    padding-top: 25px;
-    border-top: 1px solid #e5e5e5;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .club-members-section h2 {
-    margin-bottom: 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+  .club-details {
+    padding: 20px;
   }
-  
-  .club-members-section .section-header p {
-    color: #777;
-    margin-top: 0;
-  }
-  
+
   .club-members-grid {
-    display: grid;
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(220px, 1fr)
-    );
-    gap: 15px;
-    margin-top: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
-  .club-member-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px;
-    background: white;
-    border: 1px solid #e7e7e7;
-    border-radius: 12px;
+}
+
+@media (max-width: 650px) {
+  .club-title-row {
+    flex-direction: column;
   }
-  
-  .member-avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #111827;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .club-member-card p {
-    margin: 3px 0 0;
-    font-size: 13px;
-    color: #777;
+
+  .club-members-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .join-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
-  
-  @media (max-width: 700px) {
-    .club-title-row {
-      flex-direction: column;
-    }
-  
-    .club-members-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}

@@ -253,7 +253,7 @@ function ClubDetails() {
 
             <div>
               <h1>
-                {club.icon} {club.name}
+                {club.name}
               </h1>
 
               <p className="category">
@@ -613,8 +613,8 @@ function ClubDetails() {
             {actionLoading
               ? "Please wait..."
               : isMember
-              ? "Leave Club"
-              : "Join Club"}
+                ? "Leave Club"
+                : "Join Club"}
           </button>
 
         </div>
