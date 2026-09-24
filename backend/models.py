@@ -11,12 +11,20 @@ from database import Base
 
 
 class Club(Base):
+
     __tablename__ = "clubs"
+
     id = Column(Integer, primary_key=True, index=True)
+
     name = Column(String, nullable=False)
+
     description = Column(Text)
+
     category = Column(String)
+
     members = Column(Integer, default=0)
+
+    image_url = Column(String, nullable=True)
 
 
 class ClubPost(Base):

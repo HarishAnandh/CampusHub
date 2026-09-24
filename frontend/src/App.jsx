@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import CampusShield from "./pages/safety/CampusShield";
+import CrowdFlow from "./pages/safety/CrowdFlow";
 import Discussions from "./pages/Discussions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -85,8 +86,26 @@ function App() {
             </ProtectedRoute>
           }
         />
+       <Route
+  path="/campus-shield"
+  element={
+    <ProtectedRoute>
+      <CampusShield />
+    </ProtectedRoute>
+  }
+/>
 
+<Route
+  path="/crowd-flow"
+  element={
+    <ProtectedRoute>
+      <CrowdFlow />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
+
+      
     </BrowserRouter>
   );
 }

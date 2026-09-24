@@ -12,6 +12,15 @@ function Sidebar() {
         <NavLink to="/events">📅 Events</NavLink>
         <NavLink to="/polls">🗳️ Polls</NavLink>
         <NavLink to="/discussions">💬 Discussions</NavLink>
+
+        {/*<NavLink to="/campus-shield">
+          🛡️ CampusShield
+        </NavLink>
+        */}
+
+        <NavLink to="/crowd-flow">
+          🚨 CrowdFlow
+        </NavLink>
         <NavLink to="/profile">👤 Profile</NavLink>
       </nav>
     </aside>

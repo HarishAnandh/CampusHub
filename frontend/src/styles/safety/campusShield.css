@@ -1,0 +1,84 @@
+.campus-shield-page,
+.crowd-flow-page {
+  padding: 28px;
+  min-height: 100%;
+}
+
+.safety-page-header {
+  margin-bottom: 24px;
+}
+
+.page-eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.safety-page-header h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.safety-page-header p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.safety-content-grid,
+.crowd-content-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.4fr);
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.safety-card,
+.risk-stat-card {
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.safety-card h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.risk-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.risk-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.risk-stat-card span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.risk-stat-card strong {
+  font-size: 1.8rem;
+}
+
+@media (max-width: 850px) {
+  .safety-content-grid,
+  .crowd-content-grid,
+  .risk-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .campus-shield-page,
+  .crowd-flow-page {
+    padding: 18px;
+  }
+}

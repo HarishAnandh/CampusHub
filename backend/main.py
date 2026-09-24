@@ -1,7 +1,11 @@
+import os
+
+from dotenv import load_dotenv
+from supabase import create_client
 import hashlib
 from jose import jwt, JWTError
 
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -24,6 +28,15 @@ app = FastAPI(title="CampusHub API")
 
 SECRET_KEY = "campushub-secret-key-change-this-later"
 ALGORITHM = "HS256"
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+supabase = create_client(
+    SUPABASE_URL,
+    SUPABASE_KEY
+)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
 
@@ -290,7 +303,88 @@ def create_club(
 
     return new_club
 
+@app.post("/api/clubs/{club_id}/image")
+async def upload_club_image(
+    club_id: int,
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    # Check that the club exists
+    club = (
+        db.query(Club)
+        .filter(Club.id == club_id)
+        .first()
+    )
 
+    if not club:
+        raise HTTPException(
+            status_code=404,
+            detail="Club not found"
+        )
+
+    # Check file type
+    allowed_types = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ]
+
+    if file.content_type not in allowed_types:
+        raise HTTPException(
+            status_code=400,
+            detail="Only JPG, PNG and WEBP images are allowed"
+        )
+
+    # Read image
+    image_data = await file.read()
+
+    # Limit image size to 5 MB
+    if len(image_data) > 5 * 1024 * 1024:
+        raise HTTPException(
+            status_code=400,
+            detail="Image must be smaller than 5 MB"
+        )
+
+    # Create unique filename
+    extension = file.filename.split(".")[-1].lower()
+    file_path = f"club-{club_id}.{extension}"
+
+    try:
+        # Upload to Supabase Storage
+        supabase.storage \
+            .from_("club-images") \
+            .upload(
+                file_path,
+                image_data,
+                {
+                    "content-type": file.content_type,
+                    "upsert": "true"
+                }
+            )
+
+        # Get public URL
+        public_url = supabase.storage \
+            .from_("club-images") \
+            .get_public_url(file_path)
+
+        # Save URL in database
+        club.image_url = public_url
+
+        db.commit()
+        db.refresh(club)
+
+        return {
+            "message": "Club image uploaded successfully",
+            "image_url": public_url
+        }
+
+    except Exception as e:
+        db.rollback()
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Image upload failed: {str(e)}"
+        )
 # -------------------------
 # Get single club
 # -------------------------

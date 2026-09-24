@@ -1,0 +1,652 @@
+/* =========================================================
+   CROWD FLOW PAGE
+   CampusHub Orange + White Design System
+   ========================================================= */
+
+   .crowd-flow-page {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 32px;
+    background: #f3f6ff;
+    color: #292b35;
+    font-family: var(--sans);
+    text-align: left;
+  }
+  
+  /* =========================================================
+     PAGE HEADER
+     ========================================================= */
+  
+  .safety-page-header {
+    margin-bottom: 28px;
+  }
+  
+  .page-eyebrow {
+    margin: 0 0 7px;
+    color: #ff7a21;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+  }
+  
+  .safety-page-header h1 {
+    margin: 0 0 8px;
+    color: #202b4d;
+    font-family: var(--heading);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+  }
+  
+  .safety-page-header p:last-child {
+    color: #6b6375;
+    font-size: 16px;
+  }
+  
+  /* =========================================================
+     MAIN LAYOUT
+     ========================================================= */
+  
+  .crowd-content-grid {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.6fr);
+    gap: 24px;
+    align-items: start;
+  }
+  
+  /* =========================================================
+     PANELS
+     ========================================================= */
+  
+  .scenario-panel,
+  .results-panel {
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 26px;
+    border: 1px solid #dfe4f0;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow:
+      0 8px 24px rgba(45, 63, 112, 0.07),
+      0 2px 5px rgba(45, 63, 112, 0.04);
+  }
+  
+  .scenario-panel h2,
+  .results-panel h2 {
+    margin: 0 0 26px;
+    color: #202b4d;
+    font-family: var(--heading);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+  }
+  
+  /* =========================================================
+     SCENARIO PARAMETERS
+     ========================================================= */
+  
+  .parameter-group {
+    margin-bottom: 24px;
+  }
+  
+  .parameter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 9px;
+  }
+  
+  .parameter-group label {
+    display: block;
+    margin: 0;
+    color: #30364a;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+  }
+  
+  .parameter-heading strong {
+    color: #ff7a21;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  
+  /* =========================================================
+     SELECT INPUTS
+     ========================================================= */
+  
+  .parameter-group select {
+    width: 100%;
+    min-height: 42px;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid #dce2ef;
+    border-radius: 7px;
+    outline: none;
+    background: #ffffff;
+    color: #30364a;
+    font-family: var(--sans);
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  
+  .parameter-group select:hover {
+    border-color: #ffb27c;
+  }
+  
+  .parameter-group select:focus {
+    border-color: #ff7a21;
+    box-shadow: 0 0 0 3px rgba(255, 122, 33, 0.13);
+  }
+  
+  /* =========================================================
+     RANGE SLIDERS
+     ========================================================= */
+  
+  .parameter-group input[type="range"] {
+    width: 100%;
+    height: 5px;
+    margin: 9px 0 7px;
+    accent-color: #ff7a21;
+    cursor: pointer;
+  }
+  
+  .range-labels {
+    display: flex;
+    justify-content: space-between;
+    color: #777d91;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  
+  /* =========================================================
+     RUN BUTTON
+     ========================================================= */
+  
+  .run-button {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 5px;
+    padding: 13px 18px;
+    border: 1px solid #ff7a21;
+    border-radius: 8px;
+    background: #ff7a21;
+    color: #ffffff;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(255, 122, 33, 0.2);
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  
+  .run-button:hover {
+    background: #f36b10;
+    box-shadow: 0 7px 16px rgba(255, 122, 33, 0.27);
+  }
+  
+  .run-button:active {
+    transform: translateY(1px);
+  }
+  
+  .run-button:focus-visible {
+    outline: 2px solid #ff7a21;
+    outline-offset: 3px;
+  }
+  
+  /* =========================================================
+     EMPTY RESULTS STATE
+     ========================================================= */
+  
+  .empty-result {
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 24px;
+    border: 1px dashed #d8deec;
+    border-radius: 9px;
+    background: #fafbff;
+    color: #7b8194;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: center;
+  }
+  
+  .empty-result strong {
+    margin: 0 5px;
+    color: #ff7a21;
+  }
+  
+  /* =========================================================
+     RESULT METRICS
+     ========================================================= */
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  
+  .metric-card {
+    min-width: 0;
+    min-height: 104px;
+    box-sizing: border-box;
+    padding: 16px 13px;
+    border: 1px solid #dfe4f0;
+    border-radius: 9px;
+    background: #ffffff;
+    text-align: left;
+    box-shadow: 0 2px 6px rgba(45, 63, 112, 0.025);
+  }
+  
+  .metric-card span {
+    display: block;
+    margin-bottom: 10px;
+    color: #68718b;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  
+  .metric-card strong {
+    display: block;
+    color: #202b4d;
+    font-family: var(--mono);
+    font-size: 21px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+  
+  /* Severity - green */
+  
+  .severity-card {
+    border-color: #bce8d6;
+    background: #f0fcf7;
+  }
+  
+  .severity-card strong {
+    color: #14965e;
+  }
+  
+  /* Evacuation time - blue */
+  
+  .metric-card:nth-child(2) {
+    border-color: #c9ddff;
+    background: #f2f7ff;
+  }
+  
+  .metric-card:nth-child(2) strong {
+    color: #216fe8;
+  }
+  
+  /* Crowd density - purple */
+  
+  .metric-card:nth-child(3) {
+    border-color: #dfd0ff;
+    background: #f8f4ff;
+  }
+  
+  .metric-card:nth-child(3) strong {
+    color: #8050e8;
+  }
+  
+  /* Congestion - orange */
+  
+  .metric-card:nth-child(4) {
+    border-color: #ffe0b8;
+    background: #fff9ef;
+  }
+  
+  .metric-card:nth-child(4) strong {
+    color: #e98916;
+  }
+  
+  /* Bottlenecks - orange */
+  
+  .metric-card:nth-child(5) {
+    border-color: #ffe0b8;
+    background: #fffaf3;
+  }
+  
+  .metric-card:nth-child(5) strong {
+    color: #e98916;
+  }
+  
+  /* Shelter usage - red */
+  
+  .metric-card:nth-child(6) {
+    border-color: #ffcdd4;
+    background: #fff4f5;
+  }
+  
+  .metric-card:nth-child(6) strong {
+    color: #ed4054;
+  }
+  
+  /* Affected people - purple */
+  
+  .metric-card:nth-child(7) {
+    grid-column: span 1;
+    border-color: #dfd5ff;
+    background: #f8f5ff;
+  }
+  
+  .metric-card:nth-child(7) strong {
+    color: #7650dc;
+  }
+  
+  /* =========================================================
+     PROGRESS BARS
+     ========================================================= */
+  
+  .metric-progress {
+    width: 100%;
+    height: 5px;
+    margin-top: 14px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #e4e8f1;
+  }
+  
+  .metric-progress div {
+    height: 100%;
+    border-radius: inherit;
+    background: #ff9a3d;
+    transition: width 0.3s ease;
+  }
+  
+  .shelter-progress div {
+    background: #ed4054;
+  }
+  
+  /* =========================================================
+     RESULT SECTION HEADINGS
+     ========================================================= */
+  
+  .results-panel h3 {
+    margin: 26px 0 12px;
+    color: #202b4d;
+    font-family: var(--heading);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  
+  /* =========================================================
+     BOTTLENECK LOCATIONS
+     ========================================================= */
+  
+  .bottleneck-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .bottleneck-tags span {
+    display: inline-block;
+    padding: 8px 13px;
+    border: 1px solid #d9c7ff;
+    border-radius: 7px;
+    background: #f5efff;
+    color: #8050e8;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  /* =========================================================
+     EVACUATION ROUTE DIAGRAM
+     ========================================================= */
+  
+  .route-diagram {
+    padding: 16px;
+    border: 1px solid #dfe4f0;
+    border-radius: 9px;
+    background: #ffffff;
+  }
+  
+  .route-diagram h4 {
+    margin: 4px 0 20px;
+    color: #202b4d;
+    font-family: var(--heading);
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .route-map {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    border: 1px solid #dfe4f0;
+    border-radius: 7px;
+    background: #f8faff;
+  }
+  
+  /* Route nodes */
+  
+  .route-node {
+    position: absolute;
+    z-index: 3;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    color: #ffffff;
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  
+  /* Safe route - green */
+  
+  .route-top {
+    top: 12px;
+    left: calc(50% - 18px);
+    background: #24a86b;
+  }
+  
+  /* Safe route - green */
+  
+  .route-left {
+    top: 50%;
+    left: 18%;
+    background: #24a86b;
+    transform: translateY(-50%);
+  }
+  
+  /* Alternate route - blue */
+  
+  .route-right {
+    top: 50%;
+    right: 18%;
+    background: #287eea;
+    transform: translateY(-50%);
+  }
+  
+  /* Alternate route - orange */
+  
+  .route-bottom {
+    bottom: 12px;
+    left: calc(50% - 18px);
+    background: #ff9f27;
+  }
+  
+  /* Route lines */
+  
+  .route-line {
+    position: absolute;
+    z-index: 1;
+    height: 3px;
+  }
+  
+  .vertical-line {
+    top: 30px;
+    bottom: 30px;
+    left: 50%;
+    width: 3px;
+    height: auto;
+    background: #24a86b;
+    transform: translateX(-50%);
+  }
+  
+  .horizontal-line {
+    top: 50%;
+    right: 18%;
+    left: 18%;
+    height: 3px;
+    background: #287eea;
+    transform: translateY(-50%);
+  }
+  
+  /* Danger point */
+  
+  .danger-point {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ffb1b9;
+    border-radius: 50%;
+    background: #ed4054;
+    color: #ffffff;
+    font-family: var(--mono);
+    font-size: 25px;
+    font-weight: 700;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 8px rgba(237, 64, 84, 0.08);
+  }
+  
+  .danger-label {
+    position: absolute;
+    top: 64%;
+    left: 50%;
+    margin: 0;
+    color: #ed4054;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    transform: translateX(-50%);
+  }
+  
+  /* =========================================================
+     CALCULATED ROUTE
+     ========================================================= */
+  
+  .route-summary {
+    margin-top: 14px;
+    padding: 15px;
+    border: 1px solid #dfe4f0;
+    border-radius: 8px;
+    background: #ffffff;
+  }
+  
+  .route-summary strong {
+    color: #202b4d;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  
+  .route-summary p {
+    margin-top: 8px;
+    color: #4f5870;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+  
+  /* =========================================================
+     RESPONSIVE DESIGN
+     ========================================================= */
+  
+  @media (max-width: 1150px) {
+    .crowd-content-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 750px) {
+    .crowd-flow-page {
+      padding: 22px;
+    }
+  
+    .scenario-panel,
+    .results-panel {
+      padding: 20px;
+    }
+  
+    .metrics-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  
+    .metric-card:nth-child(7) {
+      grid-column: span 1;
+    }
+  
+    .safety-page-header h1 {
+      font-size: 34px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .crowd-flow-page {
+      padding: 15px;
+    }
+  
+    .scenario-panel,
+    .results-panel {
+      padding: 16px;
+      border-radius: 10px;
+    }
+  
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .metric-card:nth-child(7) {
+      grid-column: span 1;
+    }
+  
+    .parameter-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    .route-map {
+      height: 240px;
+    }
+  }
