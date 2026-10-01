@@ -4,53 +4,99 @@ import Navbar from "../../components/Navbar";
 import { simulateRoute } from "../../services/safety/routeSimulation";
 import CrowdInputForm from "../../components/safety/CrowdInputForm";
 import CrowdSimulation from "../../components/safety/CrowdSimulation";
-
+import { predictCrowdRisk } from "../../services/safety/crowdApi";
 import "../../styles/safety/crowdFlow.css";
 
 function CrowdFlow() {
+  // 1. Your states
   const [simulationResult, setSimulationResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSimulation = (formData) => {
-    const routeResult = simulateRoute({
-      crowdSize: formData.population,
-      venueArea: formData.venueArea,
-      entryPoints: formData.entryPoints,
-      exitPoints: formData.exitPoints,
-      roadWidth: 4,
-      walkingSpeed: formData.walkingSpeed,
-      blockedRoute: formData.blockedRoute,
+  // 2. Your simulation function
+  const handleSimulation = async (formData) => {
+    try {
+      setLoading(true);
+      setError("");
+  
+      const routeResult = simulateRoute({
+        crowdSize: Number(formData.population),
+        venueArea: Number(formData.venueArea),
+        entryPoints: Number(formData.entryPoints),
+        exitPoints: Number(formData.exitPoints),
+        roadWidth: Number(formData.roadWidth || 5),
+        walkingSpeed: Number(formData.walkingSpeed),
+        emergencyResponseTime: Number(formData.emergencyResponse || 5),
+        blockedRoute: formData.blockedRoute,
     });
-
-    const shelterUsage = Math.round(
-      (formData.population / formData.shelterCapacity) * 100
-    );
-
-    const affectedPeople = Math.round(
-      formData.population *
-      Math.min(
-        0.95,
-        0.25 +
-        formData.emergencyResponse / 100 +
-        formData.population / 20000
-      )
-    );
-
-    let severity = "LOW";
-
-    if (routeResult.congestion === "Moderate") {
-      severity = "MODERATE";
-    } else if (routeResult.congestion === "High") {
-      severity = "HIGH";
-    } else if (routeResult.congestion === "Critical") {
-      severity = "CRITICAL";
+  
+      const mlResult = await predictCrowdRisk(formData);
+  
+      const shelterUsage =
+  (Number(formData.population) /
+    Math.max(Number(formData.shelterCapacity), 1)) *
+  100;
+  
+      const affectedPeople =
+        Number(formData.population) * 0.15;
+  
+        setSimulationResult({
+          ...routeResult,
+        
+          mlRisk: mlResult,
+        
+          shelterUsage,
+          affectedPeople,
+        
+          // TEMPORARY TEST DATA — exactly 4 branches
+          decisionBranches: [
+            {
+              node: "LibraryJunction",
+              distance: 10,
+              route: [
+                "MainGate",
+                "LibraryJunction",
+                "AuditoriumRoad",
+                "ExitGate",
+              ],
+            },
+            {
+              node: "SportsGround",
+              distance: 13,
+              route: [
+                "MainGate",
+                "SportsGround",
+                "Cafeteria",
+                "ExitGate",
+              ],
+            },
+            {
+              node: "HostelBlock",
+              distance: 15,
+              route: [
+                "MainGate",
+                "HostelBlock",
+                "Cafeteria",
+                "ExitGate",
+              ],
+            },
+            {
+              node: "Cafeteria",
+              distance: 17,
+              route: [
+                "MainGate",
+                "Cafeteria",
+                "ExitGate",
+              ],
+            },
+          ],
+        });
+    } catch (err) {
+      console.error(err);
+      setError("Unable to run the crowd risk simulation.");
+    } finally {
+      setLoading(false);
     }
-
-    setSimulationResult({
-      ...routeResult,
-      severity,
-      affectedPeople,
-      shelterUsage,
-    });
   };
 
   return (
