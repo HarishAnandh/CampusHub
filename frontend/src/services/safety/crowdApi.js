@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://campushub-backend-mvns.onrender.com";
+const API_BASE_URL = "https://campushub-crowdflow-ml.onrender.com";
 
 export async function predictCrowdRisk(data) {
   const payload = {
